@@ -22,8 +22,8 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    var bookItem = new BookItem("1","Test Book1", "hanlyjiang", "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")
-    var bookItem2 = new BookItem("2","Test Book1", "hanlyjiang", "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")
+    var bookItem = new BookItem("1", "Test Book1", "hanlyjiang", "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")
+    var bookItem2 = new BookItem("2", "Test Book1", "hanlyjiang", "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")
     var bookItems = [bookItem, bookItem2]
     return (
       <div className="app">
@@ -49,27 +49,28 @@ class BooksApp extends React.Component {
             </div>
           </div>
         ) : (
-            <ListBooks bookItems={bookItems} />
+            <div className="list-books">
+              <ListBooksTitle title="MyReads" />
+              <ListBookContent bookItems={bookItems}/>
+              <div className="open-search">
+                <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              </div>
+            </div>
           )}
       </div>
     )
   }
 }
 
-function ListBooks(props) {
+
+function ListBookContent(props) {
   var bookItems = props.bookItems
   return (
-    <div className="list-books">
-      <ListBooksTitle title="MyReads" />
-      <div className="list-books-content">
-        <div>
-          <BookShelf bookItems={bookItems} category="Currently Reading" />
-          <BookShelf bookItems={bookItems} category="Want to Read" />
-          <BookShelf bookItems={bookItems} category="Read" />
-        </div>
-      </div>
-      <div className="open-search">
-        <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+    <div className="list-books-content">
+      <div>
+        <BookShelf bookItems={bookItems} category="Currently Reading" />
+        <BookShelf bookItems={bookItems} category="Want to Read" />
+        <BookShelf bookItems={bookItems} category="Read" />
       </div>
     </div>
   )
@@ -101,7 +102,7 @@ function BookGrid(props) {
         props.bookItems.map((bookItem) => (
           // Need a unique id 
           <li key={bookItem.id}>
-            <Book  bookItem={bookItem} />
+            <Book bookItem={bookItem} />
           </li>
         ))}
     </ol>
