@@ -22,8 +22,8 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    var bookItem = new BookItem("Test Book1", "hanlyjiang", "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")
-    var bookItem2 = new BookItem("Test Book1", "hanlyjiang", "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")
+    var bookItem = new BookItem("1","Test Book1", "hanlyjiang", "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")
+    var bookItem2 = new BookItem("2","Test Book1", "hanlyjiang", "http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")
     var bookItems = [bookItem, bookItem2]
     return (
       <div className="app">
@@ -99,8 +99,9 @@ function BookGrid(props) {
     <ol className="books-grid">
       {
         props.bookItems.map((bookItem) => (
-          <li>
-            <Book bookItem={bookItem} />
+          // Need a unique id 
+          <li key={bookItem.id}>
+            <Book  bookItem={bookItem} />
           </li>
         ))}
     </ol>
@@ -124,7 +125,8 @@ class BookShelfChanger extends React.Component {
 }
 
 class BookItem {
-  constructor(title, author, coverUrl) {
+  constructor(id, title, author, coverUrl) {
+    this.id = id
     this.title = title;
     this.author = author;
     this.coverUrl = coverUrl;
