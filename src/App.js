@@ -49,23 +49,30 @@ class BooksApp extends React.Component {
             </div>
           </div>
         ) : (
-            <div className="list-books">
-              <ListBooksTitle title="MyReads" />
-              <div className="list-books-content">
-                <div>
-                  <BookShelf bookItems={bookItems} category="Currently Reading" />
-                  <BookShelf bookItems={bookItems} category="Want to Read" />
-                  <BookShelf bookItems={bookItems} category="Read" />
-                </div>
-              </div>
-              <div className="open-search">
-                <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-              </div>
-            </div>
+            <ListBooks bookItems={bookItems} />
           )}
       </div>
     )
   }
+}
+
+function ListBooks(props) {
+  var bookItems = props.bookItems
+  return (
+    <div className="list-books">
+      <ListBooksTitle title="MyReads" />
+      <div className="list-books-content">
+        <div>
+          <BookShelf bookItems={bookItems} category="Currently Reading" />
+          <BookShelf bookItems={bookItems} category="Want to Read" />
+          <BookShelf bookItems={bookItems} category="Read" />
+        </div>
+      </div>
+      <div className="open-search">
+        <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+      </div>
+    </div>
+  )
 }
 
 function ListBooksTitle(props) {
@@ -115,6 +122,7 @@ class BookShelfChanger extends React.Component {
     )
   }
 }
+
 class BookItem {
   constructor(title, author, coverUrl) {
     this.title = title;
@@ -123,6 +131,10 @@ class BookItem {
   }
 }
 
+/**
+ * One book
+ * @param {} props 
+ */
 function Book(props) {
   var bookItem = props.bookItem
   console.log("book", bookItem)
